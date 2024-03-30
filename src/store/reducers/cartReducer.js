@@ -4,7 +4,21 @@ import { ADD_CART_ITEM, DECRESE_QUANTITY, INCRESE_QUANTITY, REMOVE_CART_ITEM } f
 export default function cartReducer(state = [], action) {
     switch (action.type) {
         case ADD_CART_ITEM:
-            return [...state, { productId: action.payload.productId, quantity: action.payload.quantity }]
+            const obj = state.find(item => item.productId === action.payload.productId)
+            if (obj) {
+                return state.map((item) => {
+                    if (item.productId === obj.productId) {
+                        return ({ ...item, quantity: item.quantity + 1 })
+                    }
+                    else {
+                        return item
+                    }
+                })
+            }
+            else {
+                return [...state, { productId: action.payload.productId, quantity: action.payload.quantity }]
+            }
+
 
         case REMOVE_CART_ITEM:
             return [...state.filter(item => item.productId !== action.payload.productId)]

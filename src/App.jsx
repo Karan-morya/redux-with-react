@@ -2,9 +2,9 @@ import { useReducer, useState } from 'react'
 
 import './App.css'
 import Product from './components/Product'
-import { useSelector } from 'react-redux'
+import Header from './components/Header'
+import { RouterProvider } from 'react-router-dom'
 function App() {
-  const products = useSelector((state) => state.products)
 
 
 
@@ -12,23 +12,7 @@ function App() {
 
   return (
     <>
-      <div className="products-container">
-        {
-          products.map((item) => {
-            return (
-              <Product
-                key={item.id}
-                title={item.title}
-                rating={item.rating.rate}
-                price={item.price}
-                imageUrl={item.image} />
-            )
-          })
-        }
-
-      </div>
-
-
+      <Header />
     </>
   )
 }
